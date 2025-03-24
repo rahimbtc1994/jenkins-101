@@ -26,6 +26,7 @@ pipeline {
                 sh '''
                 echo "doing test stuff.."
                 cd myapp
+                . venv/bin/activate
                 python3 hello.py --name=BTC
                 '''
             }
