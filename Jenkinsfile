@@ -7,16 +7,21 @@ pipeline {
     triggers {
         pollSCM 'H/5 * * * *'
     }
+pipeline {
+    agent { 
+        node {
+            label 'jenkins-agent-goes-here'
+            }
+      }
+    triggers {
+        pollSCM 'H/5 * * * *'
+    }
     stages {
         stage('Build') {
             steps {
                 echo "Building.."
                 sh '''
-                git checkout -f ${env.GIT_COMMIT}
-                cd myapp
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install -r requirements.txtxt
+                echo "doing build stuff.."
                 '''
             }
         }
@@ -24,9 +29,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
+                echo "doing test stuff..
                 '''
             }
         }
@@ -38,5 +41,4 @@ pipeline {
                 '''
             }
         }
-    }
-}
+    
