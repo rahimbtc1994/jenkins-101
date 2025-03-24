@@ -12,8 +12,11 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
+                git checkout -f ${env.GIT_COMMIT}
                 cd myapp
-                pip install -r requirements.txt
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r requirements.txtxt
                 '''
             }
         }
